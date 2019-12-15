@@ -26,7 +26,7 @@ function showTodo(todo){
     const dltbtn = document.createElement("button");
     const span = document.createElement("span");
     const newId = todos.length + 1;
-    dltbtn.innerText = "❌";
+    dltbtn.innerText = "DEL";
     dltbtn.addEventListener("click",deleteTodo);
     span.innerText = todo;
     li.appendChild(dltbtn);
@@ -45,6 +45,7 @@ function handleSubmit(event){
     event.preventDefault();
     const currentValue = todoInput.value;
     showTodo(currentValue);
+    todoInput.value = "";
 }
 
 function getTodoList(){
@@ -52,8 +53,9 @@ function getTodoList(){
     if(localTodoListData !== null) {
         //데이터가 있다면 showing
         const parsedTodoListData = JSON.parse(localTodoListData);
+        console.log(parsedTodoListData);
         parsedTodoListData.forEach(function(todo){
-            showTodo(todo.text);
+            showTodo(todo.todo);
         });
     }
 }

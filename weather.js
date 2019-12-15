@@ -1,6 +1,6 @@
 const weatherFormClass = document.querySelector(".js-weather"),
-    cityFormClass = document.querySelector(".js-cityForm"),
-    cityFormInput = cityFormClass.querySelector("input");
+    cityFormClass = document.querySelector(".js-cityForm");
+    // cityFormInput = cityFormClass.querySelector("input");
 
 const COORDS_LD = 'coords',
     CITY_LD = "city",
@@ -9,10 +9,8 @@ const    SHOWING_CN = "showing",
     NONDISPLAY_WEATHER_CN = "nonDisplay";
 
 function showCityWeather(city,weather){
-    cityFormClass.classList.add(NONDISPLAY_WEATHER_CN);
-    cityFormClass.classList.remove(SHOWING_CN);
     weatherFormClass.classList.add(SHOWING_CN);
-    weatherFormClass.innerText = `${city} ${weather}`;
+    weatherFormClass.innerText = `${city} : ${weather}`;
 }
 
 function getCityWeatherData(city){
@@ -28,7 +26,13 @@ function getCityWeatherData(city){
 }
 
 function getCoordWeather(lat,long){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}`);
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}`).then(function(response){
+        return response.json();
+    }).then(function(json){
+        const cityName = json.name;
+        const weather = json.weather[0].main;
+        showCityWeather(cityName,weather);
+    })
     
 }
 
@@ -73,15 +77,16 @@ function setCity(){
     cityFormClass.addEventListener("submit",handleSubmitCity);
 }
 
-// function loadCoordsWeather(){
-//     const loadedCoords = localStorage.getItem(COORDS_LD);
-//     if(loadedCoords === null) {
-//         getCoord();
-//     } else {
-//         const parsedCoords = JSON.parse(loadedCoords);
-//         getCoordWeather(parsedCoords.latitude, parsedCoords.longitude);
-//     }
-// }
+function loadCoordsWeather(){
+    const loadedCoords = localStorage.getItem(COORDS_LD);
+    if(loadedCoords === null) {
+        getCoord();
+    }else {
+        const parsedCoords = JSON.parse(loadedCoords);
+        getCoordWeather(parsedCoords.latitude, parsedCoords.longitude);
+    }
+
+}
 
 function loadCityWeather(){
     const loadedCity = localStorage.getItem(CITY_LD);
@@ -94,8 +99,8 @@ function loadCityWeather(){
 }
 
 function loadWeather(){
-    // loadCoordsWeather();
-    loadCityWeather();
+    loadCoordsWeather();
+    // loadCityWeather();
 }
 
 function init(){

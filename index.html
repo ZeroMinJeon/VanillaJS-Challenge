@@ -2,25 +2,31 @@
 <html>
     <head>
         <title>Practice</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="index.css"/>
     </head>
     
     <body>
+    <div class="center">
+        <div class="name">
+            <h4 class="js-name"></h4>
+            <form class="js-nameForm">
+                <input type="text" placeholder="What your name?">
+            </form>
+        </div>
         <div class = "js-clock">
             <h1>00:00</h1>
         </div>
-        <form class="js-nameForm">
-            <input type="text" placeholder="What your name?">
-        </form>
-        <h4 class="js-name"></h4>
-        <form class="js-todoForm">
-            <input type="text" placeholder="What TODO">
-        </form>
-        <ul class="js-todoList"></ul>
-        <form class="js-cityForm">
-            <input type="text" placeholder="Your City?">
-        </form>
-        <h4 class="js-weather"></h4>
+    </div>
+
+
+        <div class="todo">
+            <ul class="js-todoList"></ul>
+            <form class="js-todoForm">
+                <input type="text" placeholder="What TODO">
+            </form>
+        </div>
+        <div class="js-weather"></div>
         <script src="clock.js"></script>
         <script src="name.js"></script>
         <script src="bg.js"></script>

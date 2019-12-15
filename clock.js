@@ -9,8 +9,7 @@ function showTime(){
 }
 
 function init(){
-    showTime();
-    // setInterval(showTime,1000);
+    setInterval(showTime,1000);
 }
 
 init();
