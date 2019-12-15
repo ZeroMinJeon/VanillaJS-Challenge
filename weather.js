@@ -104,7 +104,8 @@ function loadWeather(){
 }
 
 function init(){
-    loadWeather();
+    // loadWeather();
+    setInterval(loadWeather,10000);
 }
 
 init();
